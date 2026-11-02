@@ -32,6 +32,14 @@ __pycache__/
 analysis/report_figs/_cache/
 """
 
+GITATTRIBUTES = """* text=auto
+*.sh text eol=lf
+*.pt binary
+*.npy binary
+*.pdf binary
+*.png binary
+"""
+
 
 def main() -> None:
     ap = argparse.ArgumentParser()
@@ -46,6 +54,7 @@ def main() -> None:
     for t in TOOLS:
         shutil.copy2(ROOT / "tools" / t, dest / "tools" / t)
     (dest / ".gitignore").write_text(GITIGNORE, encoding="utf-8")
+    (dest / ".gitattributes").write_text(GITATTRIBUTES, encoding="utf-8")
     missing = [p for p in ("weights", "models/gate/features.json") if not (dest / p).exists()]
     print(f"{dest}: copied; {'MISSING ' + str(missing) + ' (run tools/export_release.py --out)' if missing else 'weights and gate present'}")
 
