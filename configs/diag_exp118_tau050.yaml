@@ -1,0 +1,9 @@
+# CV-LB diagnostic (10/22, user-approved, not a candidate): exp118 maps and GBDT with the gate raised from tau 0.20 to 0.50.
+# OOF predictions (research/logs/2026-10-22_sparse_test_labels.md): sparse-test-label model LB ~0.34, additive ~0.31,
+# multiplicative ~0.32. Used only to explain the CV-LB gap in the report; never for selection.
+postprocess:
+  source_exp: ens_dml_rx_b4_cnx43_hr43
+  merge_radius: 0
+  score_min: 0.0
+  scorer: gbdt
+  tau: 0.50

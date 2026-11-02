@@ -1,0 +1,7 @@
+# exp038 maps (2048 tile model, seed 42, flip TTA) + merge 12 + GBDT scorer tau 0.20 instead of the score_min gate.
+# Compared with exp038 itself (score_min 0.82, CV 0.4307) and exp022 (1024 3-seed TTA + GBDT, 0.4277). Prediction +0.003..0.006 vs exp038.
+postprocess:
+  source_exp: exp038
+  score_min: 0.0
+  scorer: gbdt
+  tau: 0.20

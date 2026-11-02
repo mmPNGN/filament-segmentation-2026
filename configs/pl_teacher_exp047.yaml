@@ -1,0 +1,14 @@
+# Teacher member: fold-k model of exp047-full labels the 623 frames of pseudo_list_723 (ensemble teacher, averaged by tools/average_pl.py).
+infer:
+  weights_from: exp047-full
+input:
+  channels: [flat, zscore]
+  norm:
+    zscore: [0.0, 1.0]
+model:
+  zero_init_extra_channels: true
+train:
+  pseudo:
+    images_dir: data/external/gong_ha_2023_2026/jpg
+    list: data/external/gong_ha_2023_2026/pseudo_list_723.csv
+    make: true

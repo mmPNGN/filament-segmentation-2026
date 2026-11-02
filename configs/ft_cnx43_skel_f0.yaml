@@ -1,0 +1,17 @@
+# Skeleton Recall Loss fine-tuning (idea H4; Kirchhoff et al., ECCV 2024): ConvNeXt-S seed 43 fold 0 (exp108-calib weights), 5 epochs at
+# lr 3e-5, DML + 1.0 x skeleton recall of the mask on the host spines drawn 5 px wide (annotator mean). Targets the
+# fragmented / partial masks (exp118 error analysis: fragmented FN 136, in-GT fragment FP). vs ft_cnx43_ctrl_f0.yaml.
+# Gate: fold 0 PQ >= control + 0.003. Prediction +0.001..+0.005.
+seed: 43
+model:
+  encoder: tu-convnext_small
+  grad_checkpointing: true
+target:
+  spine_width: 5
+train:
+  folds: [0]
+  init_from: exp108-calib
+  epochs: 5
+  lr: 3.0e-5
+  warmup_epochs: 0
+  skel_recall_weight: 1.0

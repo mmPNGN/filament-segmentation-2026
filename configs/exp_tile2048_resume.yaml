@@ -1,0 +1,12 @@
+# Resume of exp037 full (configs/exp_tile2048.yaml, seed 42) after the power cut on 2026-10-01 17:23 (fold 3, epoch 27/30).
+# Identical settings; folds 0-2 are loaded from outputs/exp037-full/weights (train.resume_from) and re-predicted
+# (OOF + test), folds 3-4 are trained from scratch with the same fold seeds (seed + fold).
+input:
+  size: 2048
+train:
+  tile_size: 1024
+  tiles_per_image: 4
+  batch_size: 4
+  resume_from: exp037-full
+infer:
+  batch_size: 1

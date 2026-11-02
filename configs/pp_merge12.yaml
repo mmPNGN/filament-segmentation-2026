@@ -1,0 +1,6 @@
+# Post-processing-only experiment on the saved exp000 OOF / test probabilities (no training):
+# bridge fragments whose 12 px dilations touch into one instance. Grid on the exp000 OOF (analysis/pp_grid.py):
+# merge 0 -> 0.3923, 8 -> 0.3987, 12 -> 0.3991 (pooled PQ). Everything else = base.
+postprocess:
+  source_exp: exp000
+  merge_radius: 12

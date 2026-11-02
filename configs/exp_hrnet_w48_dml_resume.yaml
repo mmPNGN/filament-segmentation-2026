@@ -1,0 +1,8 @@
+# Resume of exp125-full (HRNet-W48 DML full, configs/exp_hrnet_w48_dml.yaml) after the PC shutdown on 10/22 21:00:
+# folds 0-3 are loaded from exp125-full-part (the stopped run, renamed), fold 4 is trained. Same settings otherwise.
+model:
+  encoder: tu-hrnet_w48
+  grad_checkpointing: false
+train:
+  batch_size: 2
+  resume_from: exp125-full-part

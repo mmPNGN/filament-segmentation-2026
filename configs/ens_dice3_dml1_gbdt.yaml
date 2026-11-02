@@ -1,0 +1,8 @@
+# Loss diversity: 2048 Dice seeds 42/43/44 (exp038/041/044) + DML seed 42 (exp055), equal weights -> ens_dice3_dml1
+# + merge 12 + GBDT tau 0.20. vs exp045 (3 Dice seeds, 0.4418) and exp048 (+ z-channel model, 0.4438). Fixed before the run.
+# Prediction +0.001..+0.004 vs exp045.
+postprocess:
+  source_exp: ens_dice3_dml1
+  score_min: 0.0
+  scorer: gbdt
+  tau: 0.20

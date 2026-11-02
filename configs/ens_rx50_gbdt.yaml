@@ -1,0 +1,8 @@
+# ResNeXt50 3-seed average (exp011 seed 42 / exp013 seed 43 / exp014 seed 44, tools/average_probs.py) + merge 12 + GBDT
+# expected-IoU scorer tau 0.20 (proven_improvements #1, #2, #4). Compared with exp012 (same post-processing on the ResNet34
+# 3-seed average, CV 0.4155). Prediction: +0.004..0.008 (single-model gain +0.0055 on the 3-seed means).
+postprocess:
+  source_exp: ens_rx50_seed42_43_44
+  score_min: 0.0
+  scorer: gbdt
+  tau: 0.20

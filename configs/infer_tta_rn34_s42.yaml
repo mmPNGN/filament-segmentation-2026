@@ -1,0 +1,8 @@
+# Inference only: ResNet34 seed 42 weights (exp000-full, the pre-ResNeXt baseline line) with 4-way flip TTA.
+# model.encoder must be resnet34 here because base.yaml moved to resnext50_32x4d (exp011 keep).
+seed: 42
+model:
+  encoder: resnet34
+infer:
+  tta: true
+  weights_from: exp000-full

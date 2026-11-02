@@ -1,0 +1,4 @@
+# Final-pipeline robustness (not a hypothesis): exp118 maps + merge 0 + GBDT gate averaged over 5 LightGBM seeds
+# (postprocess.scorer_seeds; = configs/final_ensemble_gbdt5.yaml on the exp118 maps). One fit varies by sd 0.0004 PQ and
+# the recorded exp118 0.4559 is the best of 5 seeds (mean 0.4552). validation.md §3.2: final selection on seed-averaged numbers.
+postprocess: {source_exp: ens_dml_rx_b4_cnx43_hr43, merge_radius: 0, score_min: 0.0, scorer: gbdt, tau: 0.20, scorer_seeds: [42, 43, 44, 45, 46]}

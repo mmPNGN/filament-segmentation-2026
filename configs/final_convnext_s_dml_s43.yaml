@@ -1,0 +1,5 @@
+# Final pipeline member 3/4 (= exp108-calib): U-Net ConvNeXt-S (timm tu-convnext_small, ImageNet, gradient checkpointing),
+# DML, batch 4, seed 43.
+seed: 43
+model: {encoder: tu-convnext_small, grad_checkpointing: true}
+train: {region_loss: dml, batch_size: 4}

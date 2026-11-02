@@ -1,0 +1,6 @@
+# Tuning on the V2S base, fold 0 only: sample training images in proportion to their annotator-record count
+# (train.record_weight). PQ is micro-pooled over records, so 2- and 3-record images weigh 2-3x in the metric but 1x in a
+# plain epoch; the test set is estimated at 2.44 records / image vs train 1.63. vs ref_v2s_f0. Prediction +0.000..+0.005.
+train:
+  folds: [0]
+  record_weight: true

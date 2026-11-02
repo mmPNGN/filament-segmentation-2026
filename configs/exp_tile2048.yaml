@@ -1,0 +1,13 @@
+# Native resolution: cache at 2048 (filament width median 11 px instead of 5.5 at 1024), train on random 1024 px tiles
+# (4 per image per epoch, half of them centred on a filament pixel), predict full 2048 frames (batch 1, flip TTA).
+# Same pixels per epoch as the 1024 baseline (4 tiles x 1024^2 = 2048^2), so the epoch count is comparable but each
+# epoch costs 4x. Hypothesis: the boundary headroom (oracle +0.016 in the scorer study) and thin barbs need the native
+# resolution. Prediction: screen +0.004..0.012 vs exp028; ~50 min.
+input:
+  size: 2048
+train:
+  tile_size: 1024
+  tiles_per_image: 4
+  batch_size: 4
+infer:
+  batch_size: 1

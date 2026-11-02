@@ -1,0 +1,6 @@
+# Inference only: ResNeXt50 seed 43 weights (exp013-calib) re-predicted with 4-way flip TTA (infer.tta). No training.
+# The three TTA runs are averaged (tools/average_probs.py) and post-processed like exp015 to measure TTA on the ensemble.
+seed: 43
+infer:
+  tta: true
+  weights_from: exp013-calib

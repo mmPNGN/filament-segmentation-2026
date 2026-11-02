@@ -1,0 +1,8 @@
+# DML ResNeXt50 + B4 + ConvNeXt-S (3 families) maps averaged with equal weights (tools/average_probs.py --name ens_dml_rx_b4_cnx --exps exp055-full exp075-full exp103-full) + merge 0 + GBDT tau 0.20.
+# ConvNeXt-S (exp103) is the new design family; 10/06 showed V2S-containing sets do not beat ResNeXt50 + B4 (exp079 0.4521).
+postprocess:
+  source_exp: ens_dml_rx_b4_cnx
+  merge_radius: 0
+  score_min: 0.0
+  scorer: gbdt
+  tau: 0.20

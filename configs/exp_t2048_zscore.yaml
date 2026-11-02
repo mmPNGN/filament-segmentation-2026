@@ -1,0 +1,10 @@
+# 2048 data-side re-test (2026-10-02 anatomy: local darkness z is the strongest single predictor of TP rate, 0.16 -> 0.85):
+# second input channel = local contrast z-score of the flattened image (src/preprocess.local_zscore, Gaussian sigma 32 px
+# @2048, clipped +-5, 0 outside the disk); first-conv weights of the new channel start at zero so the run starts from base.
+# Screen vs exp037 (2048 base screen, fold0 10 epochs, 0.4101). Prediction -0.003..+0.006.
+input:
+  channels: [flat, zscore]
+  norm:
+    zscore: [0.0, 1.0]
+model:
+  zero_init_extra_channels: true

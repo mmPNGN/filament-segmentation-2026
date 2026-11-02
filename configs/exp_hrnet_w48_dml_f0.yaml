@@ -1,0 +1,11 @@
+# Stronger version of the best diverse family: HRNet-W48 (timm tu-hrnet_w48, ImageNet, 72 M params vs W32 36 M) as the
+# U-Net encoder, DML base, batch 2 (6.6 GB peak, 148 ms/img; batch 4 spills at 12.1 GB). lr unchanged (as EfficientNet-B4
+# batch 2). Fold 0 only, 30 epochs (~2.7 h); the full run resumes fold 0 from these weights (train.resume_from).
+# Reference: HRNet-W32 fold 0 = 0.4401 (exp112, seed 42) / 0.4408 (exp116, seed 43). Prediction fold 0 0.438..0.448;
+# go to full if fold 0 >= 0.4405 (W32 mean), since a stronger different-design member is the remaining ensemble lever.
+model:
+  encoder: tu-hrnet_w48
+  grad_checkpointing: false
+train:
+  batch_size: 2
+  folds: [0]

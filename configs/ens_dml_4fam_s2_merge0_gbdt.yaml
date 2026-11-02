@@ -1,0 +1,9 @@
+# exp118 set with both seeds of the two new families averaged inside each family: ResNeXt50 (1) + B4 (1) + ConvNeXt-S
+# s42/s43 (0.5 each) + HRNet-W32 s42/s43 (0.5 each), merge 0 + GBDT. Same-family seed averaging added +0.001 at most before
+# (exp042, exp109). Pre-registered 10/11. Reference exp118 0.4559.
+postprocess:
+  source_exp: ens_dml_4fam_s2
+  merge_radius: 0
+  score_min: 0.0
+  scorer: gbdt
+  tau: 0.20

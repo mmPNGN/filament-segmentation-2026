@@ -1,0 +1,7 @@
+# Gaussian noise augmentation only (std 0.015 in flat units, ~0.65x the median train hf_noise 0.023), no gain:
+# exp017 (gain 0.10 + noise) lost -0.022 because the gain breaks the flat channel's "quiet disk = 1.0" invariant.
+# Hypothesis unchanged (noisiest quartile has RQ 0.565 vs 0.61). Prediction: screen -0.002..+0.004.
+train:
+  aug:
+    gain: 0.0
+    noise: 0.015

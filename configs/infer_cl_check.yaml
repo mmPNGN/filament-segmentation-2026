@@ -1,0 +1,6 @@
+# Equivalence check of train.channels_last: inference-only re-run of exp055 (DML ResNeXt50) fold 0 with NHWC.
+# Must reproduce exp055 fold0 (0.4302) up to float noise.
+infer:
+  weights_from: exp055-full
+train:
+  channels_last: true

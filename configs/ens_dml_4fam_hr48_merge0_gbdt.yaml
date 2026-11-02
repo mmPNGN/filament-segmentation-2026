@@ -1,0 +1,3 @@
+# Pre-registered 10/22 18:10: exp118 set + HRNet-W48 (exp125-full) as a fifth member, equal weights + merge 0 + GBDT tau 0.20.
+# Two HRNets in five members (cf. exp123: same-family seed averaging -0.0021). Prediction vs exp118: -0.003..+0.001.
+postprocess: {source_exp: ens_dml_4fam_hr48, merge_radius: 0, score_min: 0.0, scorer: gbdt, tau: 0.20}

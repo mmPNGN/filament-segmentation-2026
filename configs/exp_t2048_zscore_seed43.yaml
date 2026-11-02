@@ -1,0 +1,9 @@
+# z-channel model (exp047 config) with seed 43: second member of the input-diverse family for the 2048 ensemble.
+# exp048: adding one z-channel model to the 3 flat seeds gave +0.0020. Prediction CV 0.424..0.431 alone; ensemble of 3 flat + 2 z vs exp048 +0.000..+0.003.
+seed: 43
+input:
+  channels: [flat, zscore]
+  norm:
+    zscore: [0.0, 1.0]
+model:
+  zero_init_extra_channels: true

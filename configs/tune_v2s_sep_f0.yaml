@@ -1,0 +1,10 @@
+# Separation head re-test on the V2S base, fold 0, 30 epochs (exp073 was a 10-epoch screen on the ResNeXt50-DML base,
+# +0.0005, inside the screen noise). Oracle of ideal splitting of single blobs: +0.019 (annotator style analysis Q4).
+# target.sep_width 6 gap target as second output, p = sigmoid(mask) * (1 - sigmoid(sep)) at prediction. vs ref_v2s_f0.
+# Prediction +0.000..+0.006.
+train:
+  folds: [0]
+target:
+  sep_width: 6
+infer:
+  sep_suppress: true

@@ -1,0 +1,9 @@
+# More pseudo-labelled frames: the 2,203 quality-filtered 2023-2026 GONG frames (3.5x exp063's 623, covering 2025-26 too)
+# labelled by the fold-k DML teacher (exp071-infer); same equal-step mixing (ratio 0.5). Screen vs exp063 screen
+# (623 frames, 0.4254) and exp055 (0.4197). Prediction +0.000..+0.004 vs exp063 screen.
+train:
+  pseudo:
+    images_dir: data/external/gong_ha_2023_2026/jpg
+    list: data/external/gong_ha_2023_2026/pseudo_list_2730.csv
+    labels_from: exp071-infer
+    ratio: 0.5

@@ -1,0 +1,7 @@
+# Inference only: ResNeXt50 seed 43 weights (exp013-calib) with 8-way dihedral TTA (infer.tta_rot90). Compared with the
+# 4-way flip runs exp019/020/021 (exp022 ensemble 0.4277). Prediction: single +0.002..0.005, ensemble +0.001..0.004.
+seed: 43
+infer:
+  tta: true
+  tta_rot90: true
+  weights_from: exp013-calib

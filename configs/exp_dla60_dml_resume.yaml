@@ -1,0 +1,7 @@
+# Resume of exp119 (configs/exp_dla60_dml.yaml, DLA-60 DML, seed 42) after the PC shutdown on 10/11 (fold 4 in progress,
+# folds 0-3 saved: 0.4279 / 0.4233 / 0.4243 / 0.4187). Folds 0-3 are loaded from outputs/exp119-full-part and re-predicted.
+model:
+  encoder: tu-dla60
+  grad_checkpointing: false
+train:
+  resume_from: exp119-full-part

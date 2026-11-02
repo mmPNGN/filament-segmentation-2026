@@ -1,0 +1,8 @@
+# exp118 set (DML ResNeXt50 + B4 + ConvNeXt-S s43 + HRNet-W32 s43) + DLA-60 as a fifth family, equal weights, merge 0 + GBDT.
+# Pre-registered 10/10 before the DLA-60 run. Reference exp118 0.4559.
+postprocess:
+  source_exp: ens_dml_4fam_dla
+  merge_radius: 0
+  score_min: 0.0
+  scorer: gbdt
+  tau: 0.20

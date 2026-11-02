@@ -1,0 +1,7 @@
+# exp055 maps (2048 tile model, DML loss, seed 42, flip TTA) + merge 12 + GBDT tau 0.20 (= exp039 recipe on the DML maps).
+# vs exp039 (0.4407, Dice maps + GBDT). Prediction +0.002..+0.006 (part of the DML gain was FP removal the gate already did).
+postprocess:
+  source_exp: exp055
+  score_min: 0.0
+  scorer: gbdt
+  tau: 0.20

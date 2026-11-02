@@ -1,0 +1,5 @@
+# Architecture hypothesis (P1 structural): a larger encoder. ResNet34 is the smallest common U-Net encoder; the misses
+# that remain are thin / faint filaments that the probability map does not show at all (exp010 diagnosis), i.e. a
+# detection-capacity problem rather than a mask-shape problem. Same loss, same post-processing as base.
+model:
+  encoder: resnext50_32x4d

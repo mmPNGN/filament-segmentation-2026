@@ -1,0 +1,123 @@
+# Base configuration. Experiment yamls in this folder overlay it; new features default to OFF here so that
+# `--config configs/base.yaml` always reproduces the current best (coding-style.md §2).
+seed: 42
+data_dir: data/raw/MAGFiLO_1.0_Kaggle_2026
+folds_csv: data/folds.csv
+cache_dir: data/processed
+
+input:
+  version: 2                 # bump when src/preprocess.py changes what the cache holds (invalidates data/processed)
+  size: 2048                 # exp038 keep (+0.0109 vs 1024 + TTA): native resolution cache; training uses train.tile_size crops
+  channels: [flat]           # raw | flat | ridge  (src/preprocess.build_channels)
+  norm:                      # per-channel (mean, std) applied in the Dataset
+    raw: [0.5, 0.25]
+    flat: [1.0, 0.12]
+    ridge: [0.3, 0.3]        # Sato dark-ridge / 0.05 clipped to [0, 1]; background ~0.2, filaments 0.5-0.8
+
+target:
+  version: 1                 # bump when src/data.soft_target / spine_target change what the y cache holds (part of the y_<hash> key)
+  mode: soft_mean            # mean of the annotator records' masks (EDA §6: agreement pixels get high values)
+  solo_weight: 1.0           # value given to a filament no other annotator of the image matched (IoU > 0.5) before
+                             # averaging; 1.0 = plain mean (baseline). <1 down-weights "only me" annotations (src/data.soft_target)
+  sep_width: 0               # >0: second target channel = gaps (< 2 x sep_width px) between neighbouring filaments (src/data.sep_target)
+  spine_width: 0             # >0: second target channel = annotated spines drawn `spine_width` px wide (2048 frame) and a
+                             # second output head trained with train.spine_weight (src/data.spine_target). 0 = off
+
+model:
+  arch: Unet
+  encoder: tu-efficientnetv2_rw_s   # exp080 keep (+0.0060 vs ResNeXt50-DML exp055, 4/5 folds; timm ImageNet); resnext50_32x4d before
+  encoder_weights: imagenet
+  grad_checkpointing: true   # timm 'tu-*' encoders only: trade compute for memory (exp080 setting)
+  highres_stem: false        # true: full-resolution input skip before the head (src/models.HighResStem), zero-init residual
+  highres_width: 16
+  zero_init_extra_channels: false   # true: build the first conv for 1 channel (ImageNet RGB summed) and add the other
+                                    # input channels with zero weights, so extra channels start from the baseline (src/models.py)
+
+train:
+  folds: [0, 1, 2, 3, 4]
+  epochs: 30
+  batch_size: 4
+  lr: 3.0e-4
+  weight_decay: 1.0e-4
+  warmup_epochs: 1
+  dice_weight: 1.0
+  tversky_alpha: 0.5         # region loss = Tversky(alpha: FP weight, beta: FN weight); 0.5 / 0.5 = soft Dice (baseline)
+  tversky_beta: 0.5
+  grad_clip: 1.0
+  region_loss: dml           # exp055 keep (+0.0055, 5/5 folds): Dice semimetric loss, unbiased on the soft target. tversky (alpha/beta above; 0.5/0.5 = soft Dice) | dml: Dice semimetric loss, unbiased on soft targets
+  ema_decay: 0.0             # >0: exponential moving average of the weights, used for prediction (e.g. 0.999 ~ 2 epochs at 2048 tiles)
+  spine_weight: 0.5          # weight of the spine head loss when target.spine_width > 0
+  amp: bf16
+  channels_last: true        # speed only: NHWC memory format, 332 -> 264 ms per step (-20 %); exp085: exp055 fold0 reproduced exactly (0.4302)
+  num_workers: 4
+  max_steps: null
+  tile_size: 1024            # exp038 keep: train on random 1024 px crops of the 2048 cache (src/data.FilamentDataset._crop); 0 = full frames
+  tiles_per_image: 4         # crops per image per epoch (4 x 1024^2 = one 2048 frame)
+  tile_positive_frac: 0.5    # fraction of crops centred on a random filament pixel
+  record_weight: false       # sample images in proportion to their annotator-record count (metric pools over records)
+  pseudo:                    # unlabelled 2023-2026 GONG H-alpha (training only, host ruling #744047)
+    images_dir: null         # e.g. data/external/gong_ha_2023_2026/jpg (tools/gong_download.py)
+    list: null               # frozen csv (stem, keep) from tools/gong_pseudo_list.py (image-only quality filter)
+    make: false              # teacher run (with infer.weights_from): write outputs/<exp>/pl/fold<k>/<stem>.npy from the fold-k model
+    labels_from: null        # student run: output dir name of the teacher run, e.g. exp061-infer -> outputs/exp061-infer/pl/fold<k> (all must exist)
+    n_images: 0              # 0 = all keep rows of the list; else a fixed random subset
+    ratio: 0.0               # 0: append the frames (longer epochs); >0: same epoch length, each tile is a pseudo frame w.p. ratio
+    seed: 0
+  resume_from: null          # e.g. exp037-full: load weights/fold<k>.pt of an interrupted run of the same config where they exist, train the rest
+  init_from: null            # e.g. exp116-calib: fine-tune, i.e. initialise fold k from that run's weights/fold<k>.pt, then train as configured
+  skel_recall_weight: 0.0    # >0 (needs target.spine_width > 0): Skeleton Recall Loss of the mask output on the host spines
+                             # (src/train.skeleton_recall_loss; Kirchhoff et al. 2024) instead of a spine head
+  aug:
+    flip: true
+    rot90: true
+    gain: 0.0                # photometric: multiplicative gain U(1-gain, 1+gain) per channel (0 = off)
+    noise: 0.0               # photometric: additive Gaussian noise std in channel units (flat: train hf_noise median 0.023)
+
+infer:
+  batch_size: 1              # inference batch (full 2048 frames); null = train.batch_size
+  tta: true                  # exp022 keep (+0.0076 on the 3-seed ensemble, +0.016 single model): 4-way flip TTA at prediction time
+  weights_from: null         # e.g. exp011-full: inference-only run from that experiment's weights/fold<k>.pt (no training)
+  tta_rot90: false           # 8-way dihedral TTA (4 rotations x flip) instead of the 4 flips; 2x inference cost
+  tta_scales: []             # e.g. [1.0, 1.25]: multi-scale flip TTA (input resized, prob resized back, equal mean)
+  sep_suppress: false        # with target.sep_width: p = sigmoid(mask) * (1 - sigmoid(sep)) at prediction
+
+postprocess:                 # chosen globally on OOF; at most 4 free parameters per experiment (protocol.md §1)
+  threshold: 0.5
+  seed_threshold: 0.0        # >threshold: hysteresis, keep only components (p > threshold) that contain p > seed_threshold
+  min_area: 300              # EDA: 5 % of annotated filaments are below 317 px
+  closing_radius: 2
+  merge_radius: 0            # K4 keep 2026-10-05 (5 paired tests all positive, mean +0.0039; exp079 0.4521): no fragment bridging. exp002 had kept 12
+  score_min: 0.82            # exp007 keep (+0.0058): drop components whose mean probability is below this. Tuned on the 3-seed
+                             # averaged OOF (plateau 0.80-0.86); on a single-model OOF the maps are saturated and it drops only ~1 %
+  disk_margin: 0.99          # predictions outside r > margin * R are dropped
+  scorer: gbdt               # exp012 keep (+0.0050): component expected-IoU scorer (src/scorer.py) replacing score_min.
+                             # Only active in post-processing-only runs (source_exp); training runs keep the score_min gate
+  tau: 0.20                  # gbdt: keep components with u_hat > tau (~ PQ/2; fixed before the experiment)
+  scorer_seeds: [42]         # gbdt: LightGBM seeds whose u_hat are averaged (one fit varies by sd ~0.0004 PQ; e.g. [42, 43, 44, 45, 46])
+  source_exp: null           # e.g. exp000: skip training and post-process that experiment's saved OOF / test probs.
+                             # Current best = ens_seed42_43_44 (exp006/exp007: seed-averaged maps, tools/average_probs.py)
+
+limits:                      # subset sizes for smoke tests (null = all)
+  train: null
+  val: null
+  test: null
+
+# Mode overlays, applied last. Keep `screen` identical to research/protocol.md §2 once it is frozen.
+refiner:                     # two-stage pilot (src/refiner.py): per-instance crop refiner on the components of `stage1`
+  enabled: false
+  stage1: exp079-ensemble    # experiment with scorer_oof.parquet / scorer_test.parquet (components, nested u_hat)
+  maps: ens_dml_effb4        # source of its probability maps (outputs/<maps>-full/{oof,test_prob})
+  crop: 384                  # window side at native 2048 resolution (95 % of filaments have a bbox side <= 315 px)
+  pad: 48                    # context around the component's bounding box; larger components are resized down
+  threshold: 0.5             # refined probability -> mask
+  keep_frac: 0.2             # a refined mask smaller than this x the stage-1 component falls back to the stage-1 mask
+  encoder: resnet34
+  train: {batch_size: 16, epochs: 20, lr: 3.0e-4, num_workers: 4}
+
+modes:
+  screen:
+    train: {folds: [0], epochs: 10}
+  debug:
+    train: {folds: [0], epochs: 1, max_steps: 3, num_workers: 0}
+    limits: {train: 6, val: 3, test: 3}
+  infer: {}

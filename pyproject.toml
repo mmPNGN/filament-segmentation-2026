@@ -1,0 +1,52 @@
+[project]
+name = "filament-segmentation-2026"
+version = "0.1.0"
+description = "Solar Filament Segmentation 2026 (Kaggle)"
+requires-python = ">=3.11,<3.13"
+dependencies = [
+    "numpy",
+    "pandas",
+    "pyarrow",
+    "scipy",
+    "scikit-learn",
+    "pyyaml",
+    "tqdm",
+    "matplotlib",
+    "pillow",
+    "opencv-python-headless",
+    "torch",
+    "torchvision",
+    "timm",
+    "segmentation-models-pytorch",
+    "albumentations",
+    "pycocotools",
+    "scikit-image",
+    "lightgbm",
+    "astropy>=8.0.1",
+]
+
+[dependency-groups]
+dev = [
+    "ipykernel>=7.4.0",
+    "nbclient>=0.11.0",
+    "nbformat>=5.11.1",
+    "pytest",
+]
+
+# stringzilla (albumentations -> albucore) 5.1.2 ships no Windows cp311 wheel and would need MSVC to build
+[tool.uv]
+constraint-dependencies = ["stringzilla<5.1.2"]
+
+# CUDA wheels for the local RTX 4070 (driver 591 supports CUDA 12.8+)
+[tool.uv.sources]
+torch = [{ index = "pytorch-cu128" }]
+torchvision = [{ index = "pytorch-cu128" }]
+
+[[tool.uv.index]]
+name = "pytorch-cu128"
+url = "https://download.pytorch.org/whl/cu128"
+explicit = true
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]

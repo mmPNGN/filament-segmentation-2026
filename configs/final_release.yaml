@@ -1,0 +1,10 @@
+# Final submission from the shipped weights (no training): 4 DML U-Net members x 5 fold models (weights/<member>/),
+# 4-way flip TTA, equal-weight mean, connected components, LightGBM expected-IoU gate averaged over 5 seeds
+# (models/gate/), keep u_hat > 0.20. Reproduces exp135 (CV 0.4559). Run with main.py --infer-only (see README).
+release:
+  enabled: true
+  weights_dir: weights
+  gate_dir: models/gate
+  members: [final_rx50_dml, final_effb4_dml, final_convnext_s_dml_s43, final_hrnet_w32_dml_s43]
+  folds: [0, 1, 2, 3, 4]
+postprocess: {merge_radius: 0, score_min: 0.0, scorer: gbdt, tau: 0.20}

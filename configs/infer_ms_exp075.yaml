@@ -1,0 +1,7 @@
+# Multi-scale flip TTA (scales 1.0 + 1.25; research/intel/2026-10-03_similar_competitions.md #10) on the saved exp075 weights.
+# Inference only. The pair average + GBDT is then compared with exp076 (0.4485).
+model:
+  encoder: efficientnet-b4
+infer:
+  weights_from: exp075-full
+  tta_scales: [1.0, 1.25]

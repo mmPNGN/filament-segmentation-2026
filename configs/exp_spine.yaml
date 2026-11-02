@@ -1,0 +1,7 @@
+# Spine auxiliary head: second target channel = annotator spines drawn 5 px wide (2048 frame; 89 % of those pixels lie
+# inside the polygons), second output channel, loss weight 0.5 (train.spine_weight). Hypothesis: the spine forces the
+# shared features to learn the filament's axis / continuity, which is the only lever left for the "merged FN" (two
+# annotator filaments predicted as one) and fragmentation; ideas.md row B (spine head, clDice). Only the mask channel is
+# used at prediction time. Prediction: screen +0.003..0.008.
+target:
+  spine_width: 5

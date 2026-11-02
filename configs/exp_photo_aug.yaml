@@ -1,0 +1,8 @@
+# Photometric augmentation on top of flip + rot90: gain U(0.9, 1.1) and Gaussian noise std 0.015 (flat units; the
+# train hf_noise median is 0.023, so this roughly doubles the noise of a typical frame). Hypothesis (image_stats
+# 2026-09-30): the noisiest quartile has RQ 0.565 vs 0.61 (more FN); noise robustness should recover part of it.
+# Prediction: screen +0.002..0.006 (10 epochs may under-estimate a regulariser).
+train:
+  aug:
+    gain: 0.10
+    noise: 0.015

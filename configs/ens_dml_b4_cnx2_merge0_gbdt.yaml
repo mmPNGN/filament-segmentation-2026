@@ -1,0 +1,8 @@
+# DML B4 + ConvNeXt-S x2 (seeds 42/43 averaged, family weights 1 : 0.5 : 0.5) (tools/average_probs.py --name ens_dml_b4_cnx2 --exps exp075-full exp103-full exp108-calib --weights 1 0.5 0.5) + merge 0 + GBDT tau 0.20.
+# Third independent "ConvNeXt in the ensemble" condition for K4 (exp104 +0.0014, exp106 +0.0015; both below theta).
+postprocess:
+  source_exp: ens_dml_b4_cnx2
+  merge_radius: 0
+  score_min: 0.0
+  scorer: gbdt
+  tau: 0.20

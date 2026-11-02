@@ -1,0 +1,7 @@
+# ResNeXt50 3-seed average of 8-way dihedral TTA predictions (exp030/031/032 -> ens_rx50_tta8) + merge 12 + GBDT tau 0.20,
+# compared with exp022 (4-way flip TTA, 0.4277). Prediction +0.001..0.004.
+postprocess:
+  source_exp: ens_rx50_tta8
+  score_min: 0.0
+  scorer: gbdt
+  tau: 0.20

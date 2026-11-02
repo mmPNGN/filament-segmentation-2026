@@ -1,0 +1,6 @@
+# DML pair ens_dml_rx_v2s + merge 12 + GBDT tau 0.20 (pair search: 3 pairs in total incl. exp076).
+postprocess:
+  source_exp: ens_dml_rx_v2s
+  score_min: 0.0
+  scorer: gbdt
+  tau: 0.20

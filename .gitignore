@@ -1,0 +1,11 @@
+# competition data and caches: put the Kaggle data in data/raw/MAGFiLO_1.0_Kaggle_2026/
+data/*
+!data/folds.csv
+# run artefacts
+outputs/
+submission.csv
+.venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+analysis/report_figs/_cache/

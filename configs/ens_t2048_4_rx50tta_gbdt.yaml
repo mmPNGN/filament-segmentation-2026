@@ -1,0 +1,8 @@
+# Blend with the same 50/50 ratio as exp040: 2048 members exp038/041/044/047 (weight 0.75 each = 3) + 1024 ResNeXt50
+# flip-TTA seeds exp019/020/021 (weight 1 each = 3) -> ens_t2048_4_rx50tta + merge 12 + GBDT tau 0.20. vs exp048 (0.4438)
+# and exp040 (0.4431). Weights fixed before the run (copied from exp040, not tuned).
+postprocess:
+  source_exp: ens_t2048_4_rx50tta
+  score_min: 0.0
+  scorer: gbdt
+  tau: 0.20

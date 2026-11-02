@@ -1,0 +1,9 @@
+# Student: DML base + 623 unlabelled 2023-2024 GONG H-alpha frames with soft pseudo-labels from the fold-k DML teacher
+# (exp061-infer/pl/fold<k>; fold 0 only for the screen). Contrails 3rd/4th, SenNet 3rd, HuBMAP 3rd: pseudo-labelled extra
+# frames add diversity (solar-maximum activity, new seeing conditions) and consensus-shaped targets.
+# Same tiles per image -> an epoch is (565 + 623) x 4 tiles (~2.1x). Screen vs exp055 screen (0.4197). Prediction -0.003..+0.008.
+train:
+  pseudo:
+    images_dir: data/external/gong_ha_2023_2026/jpg
+    list: data/external/gong_ha_2023_2026/pseudo_list_723.csv
+    labels_from: exp061-infer

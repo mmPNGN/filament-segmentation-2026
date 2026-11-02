@@ -1,0 +1,5 @@
+# Final pipeline post-processing with the gate averaged over 5 LightGBM seeds (postprocess.scorer_seeds). Variance
+# reduction, not a new hypothesis: on exp118 one fit varies by sd 0.0004 PQ over seeds and the recorded 0.45585 is the
+# best of 5 (mean 0.45522, 5-seed u_hat mean 0.45594; research/logs/2026-10-22_exp118_error_analysis.md). validation.md
+# §3.2: the final selection uses seed-averaged numbers.
+postprocess: {source_exp: ens_final, merge_radius: 0, score_min: 0.0, scorer: gbdt, tau: 0.20, scorer_seeds: [42, 43, 44, 45, 46]}

@@ -1,0 +1,6 @@
+# Training length at 2048 was never tuned (30 epochs inherited from the 1024 era). fold0 10 -> 30 epochs was +0.014
+# (exp055 screen 0.4197 -> full fold0 0.4302). Test 45 epochs on fold 0 only (DML base, seed 42) vs exp055 fold0 0.4302.
+# Prediction -0.002..+0.005. A fold0-only comparison has ~0.003 noise; a full run follows only on a clear gain.
+train:
+  folds: [0]
+  epochs: 45

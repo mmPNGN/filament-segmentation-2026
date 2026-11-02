@@ -1,0 +1,5 @@
+# ResNeXt50 encoder (exp011 keep, now base.yaml) with seed 44: third member of the 3-seed average
+# (proven_improvements #2) -> tools/average_probs.py --name ens_rx50_seed42_43_44 --exps exp011-full exp013-calib exp014-calib
+model:
+  encoder: resnext50_32x4d
+seed: 44

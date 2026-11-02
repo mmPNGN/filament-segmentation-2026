@@ -1,0 +1,4 @@
+# Tuning on the V2S base, fold 0 only: filament-centred tile fraction 0.5 -> 0.7. vs ref_v2s_f0. Prediction -0.003..+0.003.
+train:
+  folds: [0]
+  tile_positive_frac: 0.7

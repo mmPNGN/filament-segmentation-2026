@@ -1,0 +1,7 @@
+# exp076 maps (DML ResNeXt50 + DML EfficientNet-B4) + merge 0 + GBDT: fourth paired merge-0 test (2 / 3 seeds / +z: +0.0047 / +0.0049 / +0.0031).
+postprocess:
+  source_exp: ens_dml_effb4
+  merge_radius: 0
+  score_min: 0.0
+  scorer: gbdt
+  tau: 0.20

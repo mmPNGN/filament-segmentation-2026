@@ -1,0 +1,9 @@
+# exp006 maps (3-seed average, merge 12) + GBDT expected-IoU scorer instead of the score_min gate (src/scorer.py).
+# Nested-CV prototype (research/logs/2026-09-30_gbdt_scorer.md): u_hat > 0.20 gives +0.0050 over score_min 0.82 with 5/5 folds
+# (tau plateau 0.16-0.23; LightGBM seeds 43/44 +0.0047/+0.0056). tau is fixed at 0.20 (= PQ/2) before this run and is
+# not re-chosen. Everything else = base.
+postprocess:
+  source_exp: ens_seed42_43_44
+  score_min: 0.0
+  scorer: gbdt
+  tau: 0.20

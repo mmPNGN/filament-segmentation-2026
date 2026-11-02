@@ -1,0 +1,7 @@
+# ConvNeXt-S DML (configs/exp_convnext_s_dml.yaml) with seed 43: second ConvNeXt member. ConvNeXt was the first family to
+# add to the ResNeXt50 + B4 pair (exp104 +0.0014, exp106 B4 + ConvNeXt +0.0015, both below theta); a second seed gives the
+# third independent "ConvNeXt in the ensemble" condition for K4 and a stronger ConvNeXt average.
+seed: 43
+model:
+  encoder: tu-convnext_small
+  grad_checkpointing: true

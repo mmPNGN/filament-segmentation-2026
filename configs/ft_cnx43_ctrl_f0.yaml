@@ -1,0 +1,12 @@
+# Fine-tuning control (idea H4, research/intel/2026-10-22_new_ideas.md): ConvNeXt-S seed 43 fold 0 (exp108-calib weights) trained 5 more
+# epochs at lr 3e-5 with the unchanged DML loss. Paired with ft_cnx43_skel_f0.yaml, so that the comparison isolates the loss.
+seed: 43
+model:
+  encoder: tu-convnext_small
+  grad_checkpointing: true
+train:
+  folds: [0]
+  init_from: exp108-calib
+  epochs: 5
+  lr: 3.0e-5
+  warmup_epochs: 0

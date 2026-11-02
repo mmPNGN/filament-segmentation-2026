@@ -1,0 +1,9 @@
+# Teacher: the fold-k DML model (exp055) labels the 2,203 frames of pseudo_list_2730 (all 2023-2026 frames that pass the
+# image-only quality filter; 3.5x the 623 of exp064). Used by the fold-k student only. Inference only.
+infer:
+  weights_from: exp055-full
+train:
+  pseudo:
+    images_dir: data/external/gong_ha_2023_2026/jpg
+    list: data/external/gong_ha_2023_2026/pseudo_list_2730.csv
+    make: true

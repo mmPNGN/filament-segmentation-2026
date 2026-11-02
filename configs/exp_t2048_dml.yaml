@@ -1,0 +1,6 @@
+# Dice semimetric loss instead of soft Dice (Wang & Blaschko 2023; research/intel/2026-10-03_similar_competitions.md #3):
+# soft Dice is not minimised at p = target for the annotator-mean SOFT target and pushes the maps to 0/1 (median
+# component probability 0.957); DML is exactly 0 at p = target and equal to soft Dice on hard targets.
+# Screen vs exp037 (0.4101). Prediction -0.002..+0.006 (more of the gain should appear after the GBDT gate).
+train:
+  region_loss: dml

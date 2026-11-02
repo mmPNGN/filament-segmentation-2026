@@ -1,0 +1,9 @@
+# Input channel 2 = Sato dark-ridge response of the flattened image (src/preprocess.dark_ridge; sigma 1.5/2.5/4 px at
+# 1024, /0.05 clipped). Classic filament detectors and the public 0.37 notebook use a Hessian ridge channel. exp001
+# (flat + zscore + rr) lost -0.0096 at 10 epochs, suspected dilution of the pretrained first conv -> here the extra
+# channel's first-conv weights start at zero (model.zero_init_extra_channels), so epoch 0 equals the baseline.
+# Prediction: screen +0.002..0.006 vs exp028 (TTA reference 0.4002).
+input:
+  channels: [flat, ridge]
+model:
+  zero_init_extra_channels: true

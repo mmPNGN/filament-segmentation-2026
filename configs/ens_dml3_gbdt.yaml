@@ -1,0 +1,7 @@
+# 3 DML encoder families: ResNeXt50 (exp055) + EfficientNet-B4 (exp075) + EfficientNetV2-S (exp080), equal weights + merge 12 + GBDT tau 0.20.
+# vs exp076 (2 families, 0.4485). Prediction +0.001..+0.005. Fixed before the run.
+postprocess:
+  source_exp: ens_dml3
+  score_min: 0.0
+  scorer: gbdt
+  tau: 0.20

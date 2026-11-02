@@ -1,0 +1,7 @@
+# 2048 seeds 42/43/44 + the z-score-channel model exp047 (different input = diversity), equal weights -> ens_t2048_s3_z
+# + merge 12 + GBDT tau 0.20. vs exp045 (3 seeds only, 0.4418). Fixed before the run.
+postprocess:
+  source_exp: ens_t2048_s3_z
+  score_min: 0.0
+  scorer: gbdt
+  tau: 0.20

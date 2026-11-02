@@ -1,0 +1,5 @@
+# Third encoder family for the DML ensemble (exp076: ResNeXt50 + EfficientNet-B4 DML pair +0.0078). tu-regnety_040, ImageNet
+# (timm), batch 4 with gradient checkpointing, DML base, 2048 tiles. Screen vs exp055 screen (0.4197). Prediction -0.006..+0.004.
+model:
+  encoder: tu-regnety_040
+  grad_checkpointing: true

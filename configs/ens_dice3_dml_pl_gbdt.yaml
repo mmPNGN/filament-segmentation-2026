@@ -1,0 +1,7 @@
+# 2048 Dice seeds 42/43/44 + DML (exp055) + DML pseudo-label student (exp063), equal weights + merge 12 + GBDT tau 0.20.
+# vs exp059 (Dice x3 + DML, 0.4437). Prediction +0.000..+0.003.
+postprocess:
+  source_exp: ens_dice3_dml_pl
+  score_min: 0.0
+  scorer: gbdt
+  tau: 0.20

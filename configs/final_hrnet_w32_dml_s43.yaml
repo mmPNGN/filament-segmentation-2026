@@ -1,0 +1,5 @@
+# Final pipeline member 4/4 (= exp116-calib): U-Net HRNet-W32 (timm tu-hrnet_w32, ImageNet; timm has no gradient
+# checkpointing for HRNet), DML, batch 4, seed 43.
+seed: 43
+model: {encoder: tu-hrnet_w32, grad_checkpointing: false}
+train: {region_loss: dml, batch_size: 4}

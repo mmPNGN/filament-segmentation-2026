@@ -1,0 +1,9 @@
+# New encoder family for the DML ensemble: ConvNeXt-S (timm tu-convnext_small, ImageNet, gradient checkpointing, batch 4).
+# Why: on 10/06 every V2S-containing combination (exp093-095) ranked below the ResNeXt50 + B4 pair even though V2S is the
+# best single model; the remaining ensemble lever is a member with a DIFFERENT design (ConvNeXt: patchify stride-4 stem,
+# 7x7 depthwise conv, LayerNorm, no BN), not a stronger one. Measured: 403 ms/step, 5.6 GB at batch 4 x 1024 (V2S 279 ms, 2.7 GB).
+# Base = V2S recipe (DML, merge 0, GBDT). Full seed 42; fold 0 is read first (vs exp089 V2S fold0 0.4413) and the run can be
+# resumed fold by fold (train.resume_from). Prediction: single CV 0.432..0.442; pair/trio with RX + B4 +0.000..+0.006.
+model:
+  encoder: tu-convnext_small
+  grad_checkpointing: true

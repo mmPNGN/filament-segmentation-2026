@@ -1,0 +1,4 @@
+# Tuning on the V2S base, fold 0 only (30 epochs): lr 3e-4 -> 2e-4. vs ref_v2s_f0. Prediction -0.003..+0.004.
+train:
+  folds: [0]
+  lr: 2.0e-4

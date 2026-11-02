@@ -1,0 +1,3 @@
+# Final pipeline post-processing (= exp118-ensemble): equal-weight mean of the 4 members' maps (tools/average_probs.py
+# --name ens_final), connected components p > 0.5 (min 300 px, closing 2, no merging), LightGBM expected-IoU gate u_hat > 0.20.
+postprocess: {source_exp: ens_final, merge_radius: 0, score_min: 0.0, scorer: gbdt, tau: 0.20}

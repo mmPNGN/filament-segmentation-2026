@@ -1,0 +1,6 @@
+# 2048 tile models seed 42 + 43 (exp038 + exp041 -> ens_t2048_s42_43) + merge 12 + GBDT tau 0.20. vs exp039 (seed 42 only, 0.4407).
+postprocess:
+  source_exp: ens_t2048_s42_43
+  score_min: 0.0
+  scorer: gbdt
+  tau: 0.20

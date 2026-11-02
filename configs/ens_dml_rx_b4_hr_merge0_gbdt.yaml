@@ -1,0 +1,8 @@
+# DML ResNeXt50 + B4 + HRNet-W32 maps averaged with equal weights + merge 0 + GBDT tau 0.20 (members: exp055-full exp075-full HRNet full).
+# Pre-registered on 10/09 before the HRNet run: the three sets evaluated after it. Reference exp079 0.4521.
+postprocess:
+  source_exp: ens_dml_rx_b4_hr
+  merge_radius: 0
+  score_min: 0.0
+  scorer: gbdt
+  tau: 0.20

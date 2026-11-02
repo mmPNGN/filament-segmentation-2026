@@ -1,0 +1,6 @@
+# HRNet-W32 DML (configs/exp_hrnet_w32_dml.yaml) with seed 43: the pre-registered gray-zone rerun of exp113 / exp114
+# (B4 + ConvNeXt + HRNet, +0.0030 / +0.0032): the same sets with both new members re-seeded (ConvNeXt seed 43 = exp108).
+seed: 43
+model:
+  encoder: tu-hrnet_w32
+  grad_checkpointing: false

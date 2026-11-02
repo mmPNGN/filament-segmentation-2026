@@ -1,0 +1,10 @@
+# Decoder diversity (idea H6, research/intel/2026-10-22_new_ideas.md): every ensemble member so far uses the U-Net
+# decoder; encoder families saturated at 4 and same-design members (HRNet-W48, extra seeds) add nothing. MAnet
+# (multi-scale attention decoder: position-wise attention + multi-scale fusion blocks) on the strongest encoder, HRNet-W32.
+# 10.5 GB at batch 4, 97 ms/img (= U-Net HRNet-W32), so a full run is ~8.5 h. UNet++ was 1.7x slower (HRNet) or
+# incompatible (ConvNeXt stride-4 stem). DML base, seed 42. Prediction: single 0.435..0.445; in the exp118 set (replace the
+# redundant ResNeXt50 or add as fifth) -0.002..+0.003.
+model:
+  arch: MAnet
+  encoder: tu-hrnet_w32
+  grad_checkpointing: false

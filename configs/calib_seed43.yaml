@@ -1,0 +1,3 @@
+# Calibration run (protocol.md: sigma_seed): the current best pipeline (base.yaml = exp000 training + exp002 post-processing)
+# with only the seed changed. Recorded with --stage calib; never a keep candidate.
+seed: 43

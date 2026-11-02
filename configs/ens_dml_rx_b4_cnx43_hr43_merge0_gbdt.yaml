@@ -1,0 +1,8 @@
+# Gray-zone rerun of exp114 (protocol §5: one rerun with re-seeded members, judged on the mean of the two runs):
+# DML ResNeXt50 + B4 + ConvNeXt-S seed 43 + HRNet-W32 seed 43 equal weights + merge 0 + GBDT tau 0.20. Pre-registered 10/09 17:40 before the run.
+postprocess:
+  source_exp: ens_dml_rx_b4_cnx43_hr43
+  merge_radius: 0
+  score_min: 0.0
+  scorer: gbdt
+  tau: 0.20

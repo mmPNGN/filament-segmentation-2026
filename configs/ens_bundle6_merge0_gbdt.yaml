@@ -1,0 +1,8 @@
+# Pre-registered bundle (2026-10-05 01:00, before seeing it): every component whose sign was consistent across repeats -
+# Dice ResNeXt50 x3 + z-channel + DML ResNeXt50 + DML EfficientNet-B4 (equal weights) + merge 0 + GBDT. Judged once vs exp039.
+postprocess:
+  source_exp: ens_bundle6
+  merge_radius: 0
+  score_min: 0.0
+  scorer: gbdt
+  tau: 0.20

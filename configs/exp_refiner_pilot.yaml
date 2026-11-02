@@ -1,0 +1,8 @@
+# Two-stage pilot (user request 2026-10-08, after research/logs/2026-10-08_two_stage_headroom.md): a ResNet34 U-Net
+# refines each kept component of exp079 (DML ResNeXt50 + B4, merge 0, GBDT) from a 384 px native-resolution crop
+# (flat image, stage-1 probability, seed) to the instance-level soft target. The kept set is unchanged; only masks change.
+# Prediction from the leave-one-out analysis: refined masks closer to the annotator consensus do NOT raise PQ
+# (0.452 -> 0.396..0.451), so expected -0.005..+0.003 vs stage 1 (stage1_cv reproduces exp079, 0.4521).
+# Primary metric registered BEFORE the run: cv (pure refined masks). blend_cv (0.5 refined + 0.5 stage 1) is a diagnostic only.
+refiner:
+  enabled: true

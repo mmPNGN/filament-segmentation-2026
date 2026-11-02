@@ -1,0 +1,8 @@
+# exp006 (3-seed averaged maps, merge 12) + score_min 0.82. Chosen on the 3-seed OOF sweep
+# (analysis/merge_variants_ens_seed42_43_44_sweep.csv): 0.80-0.86 is a plateau (0.4101-0.4115), 0.88 falls off.
+# 0.82 is on the low side of the plateau on purpose: test maps average 15 models and have a heavier low-score tail than
+# the 3-model OOF (analysis/score_shift.py), so the same threshold removes more on test; a low value keeps that inside
+# the plateau. Everything else = base.
+postprocess:
+  source_exp: ens_seed42_43_44
+  score_min: 0.82

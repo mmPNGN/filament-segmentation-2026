@@ -1,0 +1,9 @@
+# Same maps as exp048 (2048 seeds 42/43/44 + z-channel model exp047) with merge_radius 0 + GBDT tau 0.20.
+# merge 0 is already discarded (exp043/exp046, mean +0.0048 < theta); this run is a CV-LB check only (third paired
+# merge-0 point: exp048 is the merge-12 partner on the same maps). Not a keep candidate.
+postprocess:
+  source_exp: ens_t2048_s3_z
+  merge_radius: 0
+  score_min: 0.0
+  scorer: gbdt
+  tau: 0.20

@@ -1,0 +1,6 @@
+# Weight EMA (HuBMAP-vasculature 1st: "most crucial"; research/intel/2026-10-03_similar_competitions.md #1):
+# prediction with an exponential moving average of the weights, decay 0.999 (~2 epochs of 565 steps at 2048 tiles).
+# Averages the boundary jitter of training on noisy soft labels. Screen vs exp037 (0.4101); a 10-epoch screen
+# understates EMA (most of its benefit is late in the cosine schedule). Prediction +0.000..+0.006.
+train:
+  ema_decay: 0.999

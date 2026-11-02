@@ -1,0 +1,9 @@
+# Resume of exp116 (configs/exp_hrnet_w32_dml_seed43.yaml, HRNet-W32 DML seed 43) after the PC shutdown on 10/10 ~00:30
+# (folds 0-3 saved, fold 4 not started). Identical settings; folds 0-3 are loaded from outputs/exp116-calib-part/weights and
+# re-predicted, fold 4 is trained with seed + 4. Fold PQ before the stop: 0.4408 / 0.4541 / 0.4426 / 0.4439.
+seed: 43
+model:
+  encoder: tu-hrnet_w32
+  grad_checkpointing: false
+train:
+  resume_from: exp116-calib-part

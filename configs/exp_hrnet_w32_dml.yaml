@@ -1,0 +1,9 @@
+# New design family for the DML ensemble: HRNet-W32 (timm tu-hrnet_w32, ImageNet) as the U-Net encoder. HRNet keeps
+# parallel high-resolution branches through the whole network instead of one deep downsampling path (ResNeXt / EfficientNet /
+# ConvNeXt), which suits thin structures. Chosen on 10/09 instead of SegFormer MiT-B2, which did not fit this machine:
+# training 19.6 GB at batch 4 (10.0 GB at batch 2, 131 ms/img) and 13.4 s per 2048 forward at inference (attention).
+# HRNet-W32: 9.5 GB at batch 4, 86 ms/img, 129 ms per 2048 forward; no gradient checkpointing in timm for HRNet.
+# Full seed 42, DML base, merge 0. Prediction: single CV 0.430..0.442; with B4 + ConvNeXt +0.000..+0.005 vs exp079.
+model:
+  encoder: tu-hrnet_w32
+  grad_checkpointing: false

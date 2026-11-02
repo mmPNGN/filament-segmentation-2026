@@ -1,0 +1,6 @@
+# Different model family for ensemble diversity: EfficientNet-B4 encoder (smp 'efficientnet-b4', ImageNet) with the same
+# Unet decoder. (MiT-b3 transformer needs 25 GB at 1024 px batch 4 -> infeasible on 12 GB.) Hypothesis: a different
+# family makes different errors; as an ensemble member it must be about as strong as ResNeXt50 (exp026: weaker members hurt).
+# Prediction: screen -0.005..+0.005 vs exp028 (0.4002).
+model:
+  encoder: efficientnet-b4

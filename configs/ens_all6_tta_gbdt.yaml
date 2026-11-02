@@ -1,0 +1,8 @@
+# 6-model average of flip-TTA predictions (ResNet34 seeds 42/43/44 = exp023/024/025 infer, ResNeXt50 seeds 42/43/44 =
+# exp019/020/021 infer -> ens_all6_tta) + merge 12 + GBDT tau 0.20. Compared with exp022 (ResNeXt50-only TTA ensemble,
+# 0.4277). exp016 vs exp015 (no TTA) was +0.0007, so prediction: +0.000..+0.003.
+postprocess:
+  source_exp: ens_all6_tta
+  score_min: 0.0
+  scorer: gbdt
+  tau: 0.20

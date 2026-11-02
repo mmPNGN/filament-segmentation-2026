@@ -1,0 +1,6 @@
+# Tuning on the V2S base, fold 0 only: training tiles 1024 -> 1280 px (more context for long filaments), 3 tiles per image
+# (about the same pixels per epoch). vs ref_v2s_f0. Prediction -0.003..+0.004.
+train:
+  folds: [0]
+  tile_size: 1280
+  tiles_per_image: 3

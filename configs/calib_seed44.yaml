@@ -1,0 +1,3 @@
+# Calibration run (protocol.md: sigma_seed, 2nd re-run): the current best pipeline with only the seed changed.
+# Recorded with --stage calib; never a keep candidate.
+seed: 44

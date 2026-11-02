@@ -1,0 +1,8 @@
+# Same as ens_t2048_s2_gbdt but merge_radius 0 (error analysis 2026-10-02: with the GBDT gate refitted, merge 0 was
+# +0.0069 on the exp038 OOF). Fragments are scored individually by the gate. Fixed before the run.
+postprocess:
+  source_exp: ens_t2048_s42_43
+  merge_radius: 0
+  score_min: 0.0
+  scorer: gbdt
+  tau: 0.20

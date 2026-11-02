@@ -1,0 +1,6 @@
+# Different encoder family at 2048 for ensemble diversity (exp048: a model with a different input added +0.0020 to the
+# 3-seed average although it was weaker alone). EfficientNet-B4 (smp 'efficientnet-b4', ImageNet) + the same Unet decoder,
+# base.yaml 2048 tiles otherwise. exp035 (1024): screen +0.0035 vs ResNeXt50. Screen vs exp037 (0.4101).
+# Prediction: screen -0.006..+0.004.
+model:
+  encoder: efficientnet-b4

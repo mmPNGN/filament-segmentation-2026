@@ -1,0 +1,9 @@
+# Resume of exp108 (configs/exp_convnext_s_dml_seed43.yaml, ConvNeXt-S DML, seed 43) after the PC shutdown on 10/08 00:24
+# (fold 1, epoch 4). Identical settings; fold 0 is loaded from outputs/exp108-calib-part/weights and re-predicted
+# (OOF + test), folds 1-4 are trained with the same fold seeds (seed + fold). Fold 0 PQ before the stop: 0.4406.
+seed: 43
+model:
+  encoder: tu-convnext_small
+  grad_checkpointing: true
+train:
+  resume_from: exp108-calib-part

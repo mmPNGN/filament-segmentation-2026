@@ -1,0 +1,10 @@
+# Hysteresis threshold on the current best maps (exp022: ens_rx50_tta) + merge 12 + GBDT: existence decided at
+# p > 0.6 (seed_threshold), extent grown down to p > 0.4 (threshold). 2 free parameters, fixed before the run.
+# Prediction: +0.000..0.004 vs exp022 (0.4277).
+postprocess:
+  source_exp: ens_rx50_tta
+  threshold: 0.4
+  seed_threshold: 0.6
+  score_min: 0.0
+  scorer: gbdt
+  tau: 0.20

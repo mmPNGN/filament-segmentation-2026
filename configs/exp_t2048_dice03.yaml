@@ -1,0 +1,6 @@
+# Numeric stage after the data-side re-tests (user's ordering principle): region-loss weight 1.0 -> 0.3 (BCE + 0.3 Dice).
+# Error analysis 2026-10-02 hypothesis B: Dice pushes the maps to near-binary; softer, better-calibrated maps give the GBDT
+# gate more information (p_mean / p_frac_mid features) and smoother component borders. Screen vs exp037 (0.4101).
+# Prediction -0.004..+0.004 on the screen (the gain, if any, should show after the GBDT gate).
+train:
+  dice_weight: 0.3

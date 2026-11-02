@@ -1,0 +1,5 @@
+# exp011 (ResNeXt50 encoder) with seed 43: gray-zone re-run (protocol §5: 0.0025 <= delta < 0.005 -> one re-run with
+# another seed, judge on the 2-run average) and second member of the 3-seed average (proven_improvements #2).
+model:
+  encoder: resnext50_32x4d
+seed: 43

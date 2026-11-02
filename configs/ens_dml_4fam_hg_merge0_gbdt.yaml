@@ -1,0 +1,8 @@
+# exp118 set (DML ResNeXt50 + B4 + ConvNeXt-S s43 + HRNet-W32 s43) + HGNetV2-B4 as a fifth family, equal weights, merge 0 + GBDT.
+# Pre-registered 10/10 before the HGNetV2-B4 run. Reference exp118 0.4559.
+postprocess:
+  source_exp: ens_dml_4fam_hg
+  merge_radius: 0
+  score_min: 0.0
+  scorer: gbdt
+  tau: 0.20

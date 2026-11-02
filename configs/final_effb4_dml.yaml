@@ -1,0 +1,4 @@
+# Final pipeline member 2/4 (= exp075-full): U-Net EfficientNet-B4 (smp, ImageNet), DML, batch 2 (VRAM), seed 42.
+seed: 42
+model: {encoder: efficientnet-b4, grad_checkpointing: false}
+train: {region_loss: dml, batch_size: 2}

@@ -1,0 +1,6 @@
+# Full-resolution skip before the head (model.highres_stem, src/models.HighResStem; SenNet 1st / Contrails 2nd).
+# Error anatomy: TP IoU is lost at the SIDES (fixing sides 0.68 -> 0.91), i.e. boundary precision; smp Unet sets the
+# boundary from stride-2 features. Zero-init residual: starts as the base (DML) model. Screen vs exp055 screen (0.4197).
+# Prediction +0.000..+0.006, SQ up.
+model:
+  highres_stem: true

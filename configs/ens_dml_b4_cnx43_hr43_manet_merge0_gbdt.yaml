@@ -1,0 +1,3 @@
+# Pre-registered 10/23 14:00: exp118 set with the redundant ResNeXt50 (exp113 -> exp114 +0.0002) replaced by
+# MAnet-HRNet-W32, equal weights + merge 0 + GBDT tau 0.20. vs exp118 0.4559. Prediction -0.002..+0.003.
+postprocess: {source_exp: ens_dml_b4_cnx43_hr43_manet, merge_radius: 0, score_min: 0.0, scorer: gbdt, tau: 0.20}

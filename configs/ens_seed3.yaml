@@ -1,0 +1,5 @@
+# Seed ensemble without retraining: the OOF / test probability maps of exp000 (seed 42), exp003 (seed 43) and
+# exp005 (seed 44) averaged by tools/average_probs.py into outputs/ens_seed42_43_44-full/, then the current best
+# post-processing (merge_radius 12). Recorded with --stage ensemble. Everything else = base.
+postprocess:
+  source_exp: ens_seed42_43_44

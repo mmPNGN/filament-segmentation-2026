@@ -1,0 +1,4 @@
+# Pre-registered 10/22 18:10 (before exp125-full finished): exp118 set with HRNet-W32 s43 replaced by HRNet-W48 (exp125-full),
+# equal weights + merge 0 + GBDT tau 0.20. W48 fold PQ so far equals W32 (0.4407/0.4428/0.4450 vs 0.4401-0.4541).
+# Prediction vs exp118 0.4559: -0.002..+0.002 (same design, same strength).
+postprocess: {source_exp: ens_dml_rx_b4_cnx43_hr48, merge_radius: 0, score_min: 0.0, scorer: gbdt, tau: 0.20}

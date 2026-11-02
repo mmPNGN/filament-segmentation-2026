@@ -1,0 +1,7 @@
+# EfficientNet-B4 at 2048 tiles with batch 2 (batch 4 spilled VRAM in exp050: 11.6 GB; batch 2 peaks at 6.1 GB). A second
+# encoder family of full strength for the ensemble (diverse members added ~+0.002 each; exp035 at 1024 was +0.0035 vs
+# ResNeXt50). lr unchanged; twice the steps per epoch. DML base. Screen vs exp055 screen (0.4197). Prediction -0.006..+0.004.
+model:
+  encoder: efficientnet-b4
+train:
+  batch_size: 2

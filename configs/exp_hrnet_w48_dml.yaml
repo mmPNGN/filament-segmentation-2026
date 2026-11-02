@@ -1,0 +1,9 @@
+# HRNet-W48 DML full (5 folds, seed 42), batch 2: see configs/exp_hrnet_w48_dml_f0.yaml for the rationale. Fold 0 is
+# resumed from the fold-0 run exp125-screen (identical config apart from train.folds), folds 1-4 are trained.
+# Prediction: single CV 0.441..0.450 (W32 0.4425 / 0.4451); replacing or adding to HRNet-W32 in the exp118 set +0.000..+0.004.
+model:
+  encoder: tu-hrnet_w48
+  grad_checkpointing: false
+train:
+  batch_size: 2
+  resume_from: exp125-screen

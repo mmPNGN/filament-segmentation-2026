@@ -1,0 +1,2 @@
+# Base (EfficientNetV2-S + DML + merge 0) with seed 43: second V2S member and calibration of exp080.
+seed: 43

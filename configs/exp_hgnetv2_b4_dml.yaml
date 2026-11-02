@@ -1,0 +1,6 @@
+# Fifth design family for the DML ensemble (10/10, after the K4 keep of exp118 = 4 families): PP-HGNetV2-B4 (stacked light blocks with feature aggregation, learnable affine; a different design from ResNe(X)t / EfficientNet / ConvNeXt / HRNet).
+# Measured at batch 4 x 1024: 22.5M, 5.4 GB, 49 ms/img. Full seed 42, DML base, merge 0; fold 0 is read first (stop if clearly weak).
+# Prediction: single 0.428..0.440; added to the exp118 set +0.000..+0.003.
+model:
+  encoder: tu-hgnetv2_b4
+  grad_checkpointing: false

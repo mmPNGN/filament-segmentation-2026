@@ -1,0 +1,8 @@
+# Separation head (error analysis 2026-10-03 hypothesis 1): second output trained on the gaps (< 12 px) between
+# neighbouring filaments of the same annotator (target.sep_width 6, src/data.sep_target, loss weight train.spine_weight 0.5);
+# at prediction p = sigmoid(mask) * (1 - sigmoid(sep)) so bridged neighbours become separate components. Oracle of ideal
+# splitting of single blobs: +0.019. DML base. Screen vs exp055 screen (0.4197). Prediction +0.000..+0.005.
+target:
+  sep_width: 6
+infer:
+  sep_suppress: true

@@ -1,0 +1,12 @@
+# Fine-tuning control (idea H4, research/intel/2026-10-22_new_ideas.md): HRNet-W32 seed 43 fold 0 (exp116-calib weights) trained 5 more
+# epochs at lr 3e-5 with the unchanged DML loss. Paired with ft_hr43_skel_f0.yaml, so that the comparison isolates the loss.
+seed: 43
+model:
+  encoder: tu-hrnet_w32
+  grad_checkpointing: false
+train:
+  folds: [0]
+  init_from: exp116-calib
+  epochs: 5
+  lr: 3.0e-5
+  warmup_epochs: 0

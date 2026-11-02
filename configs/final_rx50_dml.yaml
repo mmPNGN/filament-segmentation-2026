@@ -1,0 +1,5 @@
+# Final pipeline member 1/4 (= exp055-full): U-Net ResNeXt50 (smp, ImageNet), DML, batch 4, seed 42. Pins every value that
+# differs from configs/base.yaml so that the member is reproducible whatever the base default encoder is.
+seed: 42
+model: {encoder: resnext50_32x4d, grad_checkpointing: false}
+train: {region_loss: dml, batch_size: 4}

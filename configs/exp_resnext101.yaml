@@ -1,0 +1,5 @@
+# Encoder capacity, step 2: resnext101_32x8d (ImageNet) instead of resnext50_32x4d (exp011 keep +0.0062). Hypothesis:
+# the ResNet34 -> ResNeXt50 gain came from RQ (more TP); a larger encoder continues that trend. Cost: ~2x train time
+# (full ~4 h). Prediction: screen +0.002..0.006 (diminishing), full +0.003..0.006 per seed.
+model:
+  encoder: resnext101_32x8d

@@ -1,0 +1,8 @@
+# Both diverse members together: 2048 Dice seeds 42/43/44 + z-channel model (exp047) + DML model (exp055), equal weights
+# -> ens_dice3_z_dml + merge 12 + GBDT tau 0.20. Each alone added ~+0.002 to the 3 Dice seeds (exp048, exp059).
+# vs exp045 (0.4418). Prediction +0.003..+0.005. Fixed before the run.
+postprocess:
+  source_exp: ens_dice3_z_dml
+  score_min: 0.0
+  scorer: gbdt
+  tau: 0.20

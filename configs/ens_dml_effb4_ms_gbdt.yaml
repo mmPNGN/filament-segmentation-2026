@@ -1,0 +1,6 @@
+# exp076 recipe on the multi-scale TTA maps (exp082 + exp083, scales 1.0 + 1.25) + merge 12 + GBDT. vs exp076 (0.4485). Fixed before the run.
+postprocess:
+  source_exp: ens_dml_effb4_ms
+  score_min: 0.0
+  scorer: gbdt
+  tau: 0.20

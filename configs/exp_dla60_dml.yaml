@@ -1,0 +1,6 @@
+# Fifth design family for the DML ensemble (10/10, after the K4 keep of exp118 = 4 families): DLA-60 (Deep Layer Aggregation.
+# Measured at batch 4 x 1024:  iterative and hierarchical aggregation of features across stages and blocks):26.1M, 6.2 GB, 56 ms/img. Full seed 42, DML base, merge 0; fold 0 is read first (stop if clearly weak).
+# Prediction: single 0.428..0.440; added to the exp118 set +0.000..+0.003.
+model:
+  encoder: tu-dla60
+  grad_checkpointing: false

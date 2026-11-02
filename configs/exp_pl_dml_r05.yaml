@@ -1,0 +1,9 @@
+# Equal-step control of exp062: same 623 pseudo-labelled frames (fold-k DML teacher exp061-infer), but the epoch keeps
+# the base length (565 x 4 tiles) and each tile is a pseudo frame with probability 0.5 (train.pseudo.ratio). Isolates the
+# pseudo-label content from the extra optimisation steps of exp062. Screen vs exp055 screen (0.4197). Prediction -0.003..+0.005.
+train:
+  pseudo:
+    images_dir: data/external/gong_ha_2023_2026/jpg
+    list: data/external/gong_ha_2023_2026/pseudo_list_723.csv
+    labels_from: exp061-infer
+    ratio: 0.5

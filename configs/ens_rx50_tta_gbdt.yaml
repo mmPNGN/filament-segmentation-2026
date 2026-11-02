@@ -1,0 +1,9 @@
+# ResNeXt50 3-seed average of the 4-way flip-TTA predictions (exp019/exp020/exp021 = infer-only re-runs of
+# exp011/exp013/exp014 weights with infer.tta, tools/average_probs.py -> ens_rx50_tta) + merge 12 + GBDT tau 0.20.
+# Compared with exp015 (same members without TTA, CV 0.4201). Single-model TTA + score_min: +0.016 per seed, so the
+# ensemble gain is expected to be smaller (+0.003..0.008) because seed averaging already softens the maps.
+postprocess:
+  source_exp: ens_rx50_tta
+  score_min: 0.0
+  scorer: gbdt
+  tau: 0.20

@@ -1,0 +1,8 @@
+# 6-model average: ResNet34 seeds 42/43/44 (exp000/exp003/exp005) + ResNeXt50 seeds 42/43/44 (exp011/exp013/exp014),
+# equal weights, + merge 12 + GBDT scorer tau 0.20. Hypothesis: the two encoders make different errors, so the
+# 6-map average beats the ResNeXt50-only average (ens_rx50_gbdt) despite the weaker ResNet34 members. Prediction: +0.002..0.005 vs ens_rx50.
+postprocess:
+  source_exp: ens_all6
+  score_min: 0.0
+  scorer: gbdt
+  tau: 0.20

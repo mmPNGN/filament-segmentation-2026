@@ -1,0 +1,8 @@
+# Same as ens_t2048_s3_gbdt but merge_radius 0: the single allowed re-test of merge 0 (exp043 gray zone +0.0045 on 2 seeds),
+# justified by the different member count. Judged on the mean of the two Deltas (2 seeds, 3 seeds) vs theta 0.005. Fixed before the run.
+postprocess:
+  source_exp: ens_t2048_s42_43_44
+  merge_radius: 0
+  score_min: 0.0
+  scorer: gbdt
+  tau: 0.20
