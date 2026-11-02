@@ -1,6 +1,6 @@
 """Build notebooks/demo_inference.ipynb: the final model loaded from the shipped weights -> submission.csv (no training).
 Usage: uv run python notebooks/build_demo.py notebooks/demo_inference.ipynb, then execute it with
-notebooks/run_walkthrough.py (GPU recommended: ~45 min on an RTX 4070)."""
+notebooks/run_walkthrough.py <nb> 0 (no cell time limit; GPU recommended: ~45 min on an RTX 4070)."""
 import sys
 
 import nbformat as nbf
