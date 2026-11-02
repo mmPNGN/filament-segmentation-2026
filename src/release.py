@@ -74,7 +74,10 @@ def gate_predict(df: pd.DataFrame, gate_dir: Path) -> np.ndarray:
 
     meta = json.loads((gate_dir / "features.json").read_text(encoding="utf-8"))
     x = df[meta["features"]]
-    return np.mean([lgb.Booster(model_file=str(gate_dir / f"lgb_seed{s}.txt")).predict(x) for s in meta["seeds"]], axis=0)
+    # read as text with normalised line endings: a CRLF checkout (Windows, core.autocrlf) breaks LightGBM's model parser
+    boosters = [lgb.Booster(model_str=(gate_dir / f"lgb_seed{s}.txt").read_bytes().decode("utf-8").replace("\r\n", "\n"))
+                for s in meta["seeds"]]
+    return np.mean([b.predict(x) for b in boosters], axis=0)
 
 
 def predict_member(member_cfg, weights_dir: Path, folds: list[int], stems: list[str], cache, device, log) -> dict[str, np.ndarray]:

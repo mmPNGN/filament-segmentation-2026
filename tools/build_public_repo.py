@@ -35,6 +35,7 @@ analysis/report_figs/_cache/
 GITATTRIBUTES = """* text=auto
 *.sh text eol=lf
 *.pt binary
+models/gate/*.txt -text
 *.npy binary
 *.pdf binary
 *.png binary
