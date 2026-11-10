@@ -135,3 +135,49 @@ def run_release(cfg, exp_dir: Path, root: Path, device, log) -> pd.DataFrame:
     sub = write_submission([{k: r[k] for k in ("filament_id", "segmentation_rle")} for r in rows], exp_dir / "submission.csv")
     log(f"release: submission {validate_submission(sub, expected_stems=stems)}")
     return sub
+
+
+def evaluate_oof(cfg, root: Path, device, log) -> dict:
+    """Out-of-fold PQ of the shipped models (the CV of the final pipeline): every training image is predicted only by
+    the fold model that did not see it (data/folds.csv), the members' maps are averaged as on test, and the gate is
+    refitted with nested folds exactly as in training (fold k's components scored by boosters fitted on the others)."""
+    from src.annotations import load_coco
+    from src.config import load_config
+    from src.data import Cache
+    from src.pipeline import evaluate_rows, load_gt
+    from src.scorer import extract_components, gt_records_by_stem, rows_from_components, score_oof
+
+    rcfg = cfg.release
+    data_dir = root / cfg.data_dir
+    records, annotations = load_coco(data_dir / "train" / "MAGFiLO_1.0_Annotations_kaggle2026_train.json")
+    folds = pd.read_csv(root / cfg.folds_csv)
+    fold_of = dict(zip(folds["stem"], folds["fold"].astype(int)))
+    images = {r.stem: data_dir / "train" / "train_images" / r.file_name for r in records.drop_duplicates("stem").itertuples()}
+    cache = Cache(root / cfg.cache_dir, dict(cfg.input))
+    cache.build(images, None, log)
+    gt = load_gt(root / cfg.cache_dir, annotations)
+    members = list(rcfg.members)
+    ens: dict[str, np.ndarray] = {}
+    for m in members:
+        mcfg = load_config(root / "configs" / f"{m}.yaml", "full")
+        for k in list(rcfg.folds):
+            val = [s for s in images if fold_of[s] == k]
+            for s, p in predict_member(mcfg, root / rcfg.weights_dir / m, [k], val, cache, device, log).items():
+                ens[s] = ens.get(s, 0) + p.astype(np.float32) / len(members)
+    probs = {s: np.round(p).astype(np.uint8).astype(np.float32) / 255.0 for s, p in ens.items()}
+    pp = dict(cfg.postprocess)
+    df = extract_components(probs, cache, pp, gt_records_by_stem(gt), int(cfg.train.num_workers))
+    df["fold"] = df["stem"].map(fold_of)
+    seeds = tuple(json.loads((root / rcfg.gate_dir / "features.json").read_text(encoding="utf-8"))["seeds"])
+    df["u_hat"] = score_oof(df, fold_of, seeds)
+    keep = df["u_hat"].values > float(pp["tau"])
+    per_fold, all_rows = {}, []
+    for k in sorted(df["fold"].unique()):
+        rows = rows_from_components(df[df["fold"] == k], keep[(df["fold"] == k).values])
+        per_fold[int(k)] = evaluate_rows(gt, rows, [s for s in images if fold_of[s] == k]).pq
+        all_rows += rows
+    pooled = evaluate_rows(gt, all_rows, list(images))
+    out = {"cv": float(np.mean(list(per_fold.values()))), "cv_std": float(np.std(list(per_fold.values()))),
+           "folds": per_fold, "pooled": pooled.as_metrics()}
+    log(f"release OOF: CV {out['cv']:.4f} +- {out['cv_std']:.4f}, pooled PQ {pooled.pq:.4f}")
+    return out

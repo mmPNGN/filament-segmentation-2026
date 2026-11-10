@@ -37,7 +37,7 @@ The metric (`src/metric.py`) reproduces the host's self-evaluation notebook exac
 ## Reproduce the submission from the shipped weights (no training)
 
 The trained models are in the repository: `weights/<member>/fold<k>.part<j>.pt` (20 fold models of the 4 members,
-fp16, split into files below 90 MB) and `models/gate/` (the LightGBM gate, 5 seeds). `notebooks/demo_inference.ipynb`
+fp16, split into files below 90 MB) and `models/gate/` (the LightGBM gate, 5 seeds). `notebooks/demo.ipynb`
 loads them and writes `submission.csv`; the same from the command line:
 
 ```bash
@@ -71,7 +71,7 @@ tools/             run_exp.py (runner), results.py (ledger), average_probs.py (e
 tests/             metric equivalence with the host notebook
 analysis/          report_figs/: scripts for the report figures (out-of-fold predictions)
 research/          results.tsv (every run with what changed and why), report/figs/
-notebooks/         demo_inference.ipynb (shipped weights -> submission), pipeline_walkthrough.ipynb (every stage on one image)
+notebooks/         demo.ipynb (pre-processing -> optional training -> evaluation -> submission, from the shipped weights), pipeline_walkthrough.ipynb (every stage on one image)
 weights/, models/  trained fold models (fp16 shards) and the LightGBM gate
 ```
 
