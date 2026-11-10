@@ -91,7 +91,8 @@ md("""
 Each training image is predicted only by the fold model that did not see it; the members' maps are averaged; the
 candidates (connected components of p > 0.5) are scored by gate boosters fitted on the other folds; PQ is computed with
 the official matching (IoU > 0.5, per annotator record, micro-pooled; `src/metric.py`). This is our cross-validation
-score (0.4559 for the submitted models).
+score: 0.4559 with the original fp32 models, 0.4555 with the fp16 copies shipped here (the test submission is
+identical either way).
 """)
 code("""
 if EVALUATE_OOF:

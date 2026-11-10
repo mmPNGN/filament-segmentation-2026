@@ -47,6 +47,8 @@ uv run python main.py --config configs/final_release.yaml --infer-only     # -> 
 ```
 
 About 45 min on one RTX 4070 (20 models x 180 images x 4 flips at 2048²); it also runs on CPU, much more slowly.
+The notebook additionally recomputes the out-of-fold PQ from the shipped weights (0.4555; 0.4559 with the fp32
+originals) and, on a fresh clone, reproduced the Kaggle submission exactly (1147/1147 instances, 73 min in total).
 
 ## Retrain from scratch
 
